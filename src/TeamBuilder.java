@@ -22,11 +22,48 @@ public class TeamBuilder extends Utility {
 		this.sortBySection();
 		
 		for(int i = 0; i < teams.size() - 1; i++) {
-			if(teams.get(i).section != teams.get(i + 1).section) {
+			if(teams.get(i).getSection() != teams.get(i + 1).getSection()) {
 				numSections++;
 			}
 		}
 		return numSections;
+	}
+	
+	public int numberoOfStudents() {
+		return this.teams.size();
+	}
+	
+	public void createTeams() {
+		this.sortByJavaKnowledge();
+		
+		for(int i = 0; i < this.teams.size(); i += 2) {
+			CSCE314Student student1 = this.teams.get(i);
+			CSCE314Student student2 = student1;
+			boolean foundPartner = false;
+			
+			for(int j = this.teams.size() - 1; j >= 0; j--) {
+				student2 = this.teams.get(j);
+			
+				if(student2 == student1) {
+					break;
+				} else if(student2.getSection() == student1.getSection()) {
+					foundPartner = true;
+					this.teams.remove(j);
+					break;
+				}
+			}
+			
+			if(foundPartner)
+				this.teams.add(i, student2);
+			else {
+				teams.remove(student1);
+				teams.add(student1);
+			}
+		}
+	}
+	
+	public void writePartners() {
+		writeResults(this.teams);
 	}
 	
 	public void outputTeams() {

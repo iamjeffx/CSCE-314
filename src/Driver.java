@@ -6,7 +6,8 @@ public class Driver extends TeamBuilder {
 		readFile("data.csv", TeamMaker.teams);
 		
 		TeamMaker.sortByJavaKnowledge();
-		TeamMaker.sortBySection();
+		TeamMaker.createTeams();
 		TeamMaker.outputTeams();
+		TeamMaker.writePartners();
 	}
 }
