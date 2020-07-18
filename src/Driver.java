@@ -7,7 +7,10 @@ public class Driver extends TeamBuilder {
 		
 		TeamMaker.sortByJavaKnowledge();
 		TeamMaker.createTeams();
+		
 		TeamMaker.outputTeams();
 		TeamMaker.writePartners();
+		
+//		TeamMaker.createFrame();
 	}
 }

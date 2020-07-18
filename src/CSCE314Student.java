@@ -1,5 +1,3 @@
-import java.util.Comparator;
-
 public class CSCE314Student extends Student {
 	int JavaKnowledge;
 	int section;
