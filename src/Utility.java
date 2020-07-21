@@ -1,3 +1,13 @@
+/** File: Utility.java
+ * Author: Jeffrey Xu
+ * Date: 8/04/2020
+ * Email: jeffreyxu@tamu.edu
+ * 
+ * Description: Contains functions that can read an input file containing CSCE314Student
+ * information and store the information into an ArrayList. Writes results to results.txt
+ * and errors to ErrorLog.txt.  
+ */
+
 import java.util.*;
 import java.io.*;
 import java.io.FileNotFoundException;
@@ -6,7 +16,6 @@ public class Utility {
 	
 	public static boolean readFile(String filename, ArrayList<CSCE314Student> students) throws FileNotFoundException {
 		try {
-			System.out.println("ReadFile called");
 			Scanner scan = new Scanner(new File(filename));
 			scan.nextLine();
 			

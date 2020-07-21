@@ -1,28 +1,27 @@
-import java.awt.EventQueue;
-import java.awt.FileDialog;
+/** File: GUI.java
+ * Author: Jeffrey Xu
+ * Date: 8/04/2020
+ * Email: jeffreyxu@tamu.edu
+ * 
+ * Description: GUI class that implements user interface for creating 
+ * partners and displaying errors.  
+ */
 
+import java.awt.FileDialog;
 import javax.swing.JFrame;
-import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
-import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;
-import javax.swing.Action;
 import java.awt.event.ActionListener;
-
 import java.io.*;
-import javax.swing.JTextArea;
 import javax.swing.JTextPane;
-import javax.swing.JEditorPane;
-import javax.swing.JFileChooser;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JMenu;
 
 import java.util.*;
-import java.awt.ScrollPane;
 
 public class GUI extends Utility {
 
@@ -82,6 +81,7 @@ public class GUI extends Utility {
 						file_output += output.nextLine() + "\n";
 					}
 					textArea.setText(file_output);
+					output.close();
 					
 				    String file_errors = "";
 				    Scanner error = new Scanner(new File("ErrorLog.txt"));
@@ -89,6 +89,7 @@ public class GUI extends Utility {
 				    	file_errors += error.nextLine() + "\n";
 				    }
 				    textArea_1.setText(file_errors);
+				    error.close();
 					
 				} catch (FileNotFoundException e1) {
 					// TODO Auto-generated catch block
@@ -103,7 +104,7 @@ public class GUI extends Utility {
 		textArea_1 = new JTextPane();
 		
 		JScrollPane scrollPane = new JScrollPane(textArea);
-		scrollPane.setBounds(36, 168, 426, 425);
+		scrollPane.setBounds(36, 162, 426, 425);
 		frame.getContentPane().add(scrollPane);
 		
 		JScrollPane scrollPane_1 = new JScrollPane(textArea_1);
@@ -124,7 +125,6 @@ public class GUI extends Utility {
 			    dialog.setVisible(true);
 			    filename = dialog.getFile();
 			    lblNewLabel_1.setText("Filename: " + filename);
-			    System.out.println(filename + " selected");
 			}
 		});
 		mnFile.add(mntmUploadFile);

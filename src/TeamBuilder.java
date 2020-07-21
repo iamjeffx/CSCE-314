@@ -1,10 +1,16 @@
-import java.awt.BorderLayout;
-import java.awt.Font;
-import java.awt.GridLayout;
+/** File: TeamBuilder.java
+ * Author: Jeffrey Xu
+ * Date: 8/04/2020
+ * Email: jeffreyxu@tamu.edu
+ * 
+ * Description: TeamBuilder class that creates java partners based on 
+ * Java knowledge input from a survey. Also includes CSCE314Student 
+ * comparators to sort the ArrayList containing the students. 
+ */
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import javax.swing.*;
 
 public class TeamBuilder extends Utility {
 	ArrayList<CSCE314Student> teams;
