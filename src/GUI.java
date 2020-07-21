@@ -18,11 +18,17 @@ import javax.swing.JEditorPane;
 import javax.swing.JFileChooser;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JScrollPane;
 import javax.swing.JMenu;
+
+import java.util.*;
+import java.awt.ScrollPane;
 
 public class GUI extends Utility {
 
 	private JFrame frame;
+	JTextPane textArea;
+	JTextPane textArea_1;
 	JLabel lblNewLabel_1;
 	String filename;
 	TeamBuilder teamMaker = new TeamBuilder();
@@ -60,7 +66,7 @@ public class GUI extends Utility {
 		
 		JLabel lblErrors = new JLabel("Errors");
 		lblErrors.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblErrors.setBounds(458, 140, 56, 16);
+		lblErrors.setBounds(503, 140, 56, 16);
 		frame.getContentPane().add(lblErrors);
 		
 		JButton btnGenerateTeams = new JButton("Generate Teams");
@@ -70,6 +76,20 @@ public class GUI extends Utility {
 					readFile(filename, teamMaker.teams);
 					teamMaker.createTeams();
 					teamMaker.writePartners();
+					String file_output = "";
+					Scanner output = new Scanner(new File("results.txt"));
+					while(output.hasNextLine()) {
+						file_output += output.nextLine() + "\n";
+					}
+					textArea.setText(file_output);
+					
+				    String file_errors = "";
+				    Scanner error = new Scanner(new File("ErrorLog.txt"));
+				    while(error.hasNextLine()) {
+				    	file_errors += error.nextLine() + "\n";
+				    }
+				    textArea_1.setText(file_errors);
+					
 				} catch (FileNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -79,13 +99,16 @@ public class GUI extends Utility {
 		btnGenerateTeams.setBounds(579, 480, 143, 40);
 		frame.getContentPane().add(btnGenerateTeams);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(49, 181, 336, 389);
-		frame.getContentPane().add(textArea);
+		textArea = new JTextPane();
+		textArea_1 = new JTextPane();
 		
-		JTextArea textArea_1 = new JTextArea();
-		textArea_1.setBounds(486, 181, 341, 204);
-		frame.getContentPane().add(textArea_1);
+		JScrollPane scrollPane = new JScrollPane(textArea);
+		scrollPane.setBounds(36, 168, 426, 425);
+		frame.getContentPane().add(scrollPane);
+		
+		JScrollPane scrollPane_1 = new JScrollPane(textArea_1);
+		scrollPane_1.setBounds(486, 162, 337, 261);
+		frame.getContentPane().add(scrollPane_1);
 		
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
@@ -101,7 +124,6 @@ public class GUI extends Utility {
 			    dialog.setVisible(true);
 			    filename = dialog.getFile();
 			    lblNewLabel_1.setText("Filename: " + filename);
-			    
 			    System.out.println(filename + " selected");
 			}
 		});
