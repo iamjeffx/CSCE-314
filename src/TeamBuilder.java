@@ -1,4 +1,6 @@
+import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -73,29 +75,9 @@ public class TeamBuilder extends Utility {
 			System.out.println(teams.get(i).toString());
 		}
 	}
-	
-	public void createFrame() {
-		JFrame frame = new JFrame();
-		
-		JPanel panel = new JPanel();
-		
-		JLabel title = new JLabel("CSCE 314 Java Team Creator");
-		title.setVerticalAlignment(JLabel.TOP);
-		title.setHorizontalAlignment(JLabel.CENTER);
-		title.setFont(new Font("Arial", Font.BOLD, 30));
-		panel.add(title);
-		
-		JLabel label = new JLabel("Filename: ");
-		label.setFont(new Font("Arial", Font.PLAIN, 20));
-		label.setLocation(200, 100);
-		panel.add(label);
-		
-		frame.add(panel);
-		frame.setSize(1000, 1000);
-		frame.setVisible(true);
-		frame.setLocationRelativeTo(null);
-	}
 }
+
+
 
 class SortBySection implements Comparator<CSCE314Student>{
 
