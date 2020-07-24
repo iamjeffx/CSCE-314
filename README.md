@@ -1,5 +1,7 @@
 # CSCE-314
-All projects in CSCE 314. Do not copy code. This course was taken in Summer 2020 with Professor Shawn Lupoli. This course focuses on a functional programming language (Scheme; not much documentation on this language. Gambit Scheme was the flavor used for this particular course) and an Object-Orientated programming language (Java for this course). 
+All projects in CSCE 314. Do not copy code. This course was taken in Summer 2020 with Professor Shawn Lupoli. This course focuses on a functional programming language (**Scheme**; not much documentation on this language. Gambit Scheme was the flavor used for this particular course) and an Object-Orientated programming language (**Java** for this course).
+
+A good video on an introduction to Scheme can be found [here](https://www.youtube.com/watch?v=6k78c8EctXI). For Java help, **GeeksForGeeks** provides a great platform with plenty of good Java information; the Java page can be found [here](https://www.geeksforgeeks.org/java/). 
 
 ## Cloning
 To clone this repository, make sure **git** is installed on your system. This can be done using **pip** with the following command:
