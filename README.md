@@ -10,7 +10,7 @@ pip install git
 ```
 Next, clone the repository using the https link:
 ```bash
-git clone <https link>
+git clone https://github.com/iamjeffx/CSCE-314.git
 ```
 
 ## Usage
