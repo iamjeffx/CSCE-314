@@ -16,22 +16,27 @@ public class Utility {
 	
 	public static boolean readFile(String filename, ArrayList<CSCE314Student> students) throws FileNotFoundException {
 		try {
+			// Open file and error file
 			Scanner scan = new Scanner(new File(filename));
 			scan.nextLine();
 			
 			PrintWriter error = new PrintWriter(new File("ErrorLog.txt"));
 			
+			int lineNumber = 0;
+			
 			while(scan.hasNextLine()) {
+				// Split the line into tokens
 				String line = scan.nextLine();
 				String[] tokens = line.split(",");
 				
+				// Initialize student member values and catch errors that may reside in the file
 				int JavaKnowledge = 0;
 				int section = 0;
 				
 				if(tokens[1].chars().allMatch(Character::isDigit)) {
 					JavaKnowledge = Integer.parseInt(tokens[1]);
 				} else {
-					error.println("ERROR IN " + filename + ": JavaKnowledge isn't numeric");
+					error.println("ERROR IN " + filename  + ", Line " + lineNumber + ": JavaKnowledge isn't numeric");
 					continue;
 				}
 				
@@ -39,20 +44,34 @@ public class Utility {
 					if(tokens[5].substring(0, 3).chars().allMatch(Character::isDigit)) {
 						section = Integer.parseInt(tokens[5].substring(0, 3));
 					} else {
-						error.println("ERROR IN " + filename + ": Section isn't numeric");
+						error.println("ERROR IN " + filename  + ", Line " + lineNumber + ": Section isn't numeric");
 						continue;
 					}
 				} else {
-					error.println("ERROR IN " + filename + ": Section format isn't correct");
+					error.println("ERROR IN " + filename + ", Line " + lineNumber + ": Section format isn't correct");
 					continue;
 				}
-				
+				// Initialize rank enum
+				Rank rank;
+				String r = tokens[7];
+				if(r.equals("1")) {
+					rank = Rank.Freshman;
+				} else if(r.equals("2")) {
+					rank = Rank.Sophomore;
+				} else if(r.equals("3")) {
+					rank = Rank.Junior;
+				} else if(r.equals("4")) {
+					rank = Rank.Senior;
+				} else {
+					error.println("ERROR IN " + filename + ", Line " + lineNumber + ": Rank is invalid");
+					continue;
+				}
 				String UIN = tokens[6].substring(0, 10);
 				String[] name = tokens[4].split(" ");
-				
-				CSCE314Student student = new CSCE314Student(name[0], name[1], UIN, JavaKnowledge, section);
-				
+				// Add student to the ArrayList
+				CSCE314Student student = new CSCE314Student(name[0], name[1], UIN, JavaKnowledge, section, rank);
 				students.add(student);
+				lineNumber++;
 			}
 			scan.close();
 			error.close();
@@ -72,6 +91,7 @@ public class Utility {
 			for(int i = 0; i < students.size(); i++) {
 				String partners = students.get(i).toString();
 				
+				// Write partners if the end of the list isn't reached and the sections of the two students are the same
 				if(i + 1 == students.size()) {
 					out.println(partners);
 				} else if(students.get(i).getSection() == students.get(i + 1).getSection()) {
@@ -82,7 +102,6 @@ public class Utility {
 					out.println(partners);
 				}
 			}
-			
 			out.close();
 			return true;
 		} catch(Exception e) {

@@ -26,9 +26,9 @@ import java.util.*;
 public class GUI extends Utility {
 
 	private JFrame frame;
-	JTextPane textArea;
-	JTextPane textArea_1;
-	JLabel lblNewLabel_1;
+	JTextPane resultOutput;
+	JTextPane errorOutput;
+	JLabel fileTitle;
 	String filename;
 	TeamBuilder teamMaker = new TeamBuilder();
 
@@ -43,31 +43,37 @@ public class GUI extends Utility {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		// Set frame and layout
 		frame = new JFrame();
 		frame.setBounds(100, 100, 903, 737);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("CSCE 314 Java Team Creator");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 24));
-		lblNewLabel.setBounds(257, 13, 356, 54);
-		frame.getContentPane().add(lblNewLabel);
+		// Set title
+		JLabel title = new JLabel("CSCE 314 Java Team Creator");
+		title.setFont(new Font("Tahoma", Font.BOLD, 24));
+		title.setBounds(257, 13, 356, 54);
+		frame.getContentPane().add(title);
 		
-		lblNewLabel_1 = new JLabel("Filename:");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_1.setBounds(61, 85, 766, 31);
-		frame.getContentPane().add(lblNewLabel_1);
+		// Set filename
+		fileTitle = new JLabel("Filename:");
+		fileTitle.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		fileTitle.setBounds(61, 85, 766, 31);
+		frame.getContentPane().add(fileTitle);
 		
-		JLabel lblNewLabel_2 = new JLabel("Results");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_2.setBounds(61, 140, 56, 16);
-		frame.getContentPane().add(lblNewLabel_2);
+		// Set title for results
+		JLabel resultsTitle = new JLabel("Results");
+		resultsTitle.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		resultsTitle.setBounds(61, 140, 56, 16);
+		frame.getContentPane().add(resultsTitle);
 		
-		JLabel lblErrors = new JLabel("Errors");
-		lblErrors.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblErrors.setBounds(503, 140, 56, 16);
-		frame.getContentPane().add(lblErrors);
+		// Set title for errors
+		JLabel errorTitle = new JLabel("Errors");
+		errorTitle.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		errorTitle.setBounds(503, 140, 56, 16);
+		frame.getContentPane().add(errorTitle);
 		
+		// Generate teams button and add event listener
 		JButton btnGenerateTeams = new JButton("Generate Teams");
 		btnGenerateTeams.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -80,7 +86,7 @@ public class GUI extends Utility {
 					while(output.hasNextLine()) {
 						file_output += output.nextLine() + "\n";
 					}
-					textArea.setText(file_output);
+					resultOutput.setText(file_output);
 					output.close();
 					
 				    String file_errors = "";
@@ -88,11 +94,10 @@ public class GUI extends Utility {
 				    while(error.hasNextLine()) {
 				    	file_errors += error.nextLine() + "\n";
 				    }
-				    textArea_1.setText(file_errors);
+				    errorOutput.setText(file_errors);
 				    error.close();
 					
 				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -100,23 +105,28 @@ public class GUI extends Utility {
 		btnGenerateTeams.setBounds(579, 480, 143, 40);
 		frame.getContentPane().add(btnGenerateTeams);
 		
-		textArea = new JTextPane();
-		textArea_1 = new JTextPane();
+		// Initialize text panes for results and errors
+		resultOutput = new JTextPane();
+		errorOutput = new JTextPane();
 		
-		JScrollPane scrollPane = new JScrollPane(textArea);
+		// Set scroll panes for results and errors
+		JScrollPane scrollPane = new JScrollPane(resultOutput);
 		scrollPane.setBounds(36, 162, 426, 425);
 		frame.getContentPane().add(scrollPane);
 		
-		JScrollPane scrollPane_1 = new JScrollPane(textArea_1);
+		JScrollPane scrollPane_1 = new JScrollPane(errorOutput);
 		scrollPane_1.setBounds(486, 162, 337, 261);
 		frame.getContentPane().add(scrollPane_1);
 		
+		// Initialize menubar
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 		
-		JMenu mnFile = new JMenu("File");
-		menuBar.add(mnFile);
+		// Add File option onto menubar
+		JMenu fileSelect = new JMenu("File");
+		menuBar.add(fileSelect);
 		
+		// Add Upload File button onto File option on the menubar
 		JMenuItem mntmUploadFile = new JMenuItem("Upload File");
 		mntmUploadFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -124,10 +134,10 @@ public class GUI extends Utility {
 			    dialog.setMode(FileDialog.LOAD);
 			    dialog.setVisible(true);
 			    filename = dialog.getFile();
-			    lblNewLabel_1.setText("Filename: " + filename);
+			    fileTitle.setText("Filename: " + filename);
 			}
 		});
-		mnFile.add(mntmUploadFile);
+		fileSelect.add(mntmUploadFile);
 		frame.setVisible(true);
 	}
 }

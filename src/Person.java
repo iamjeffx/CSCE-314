@@ -1,3 +1,11 @@
+/** File: Person.java
+ * Author: Jeffrey Xu
+ * Date: 8/04/2020
+ * Email: jeffreyxu@tamu.edu
+ * 
+ * Description: Abstract class for Person definition
+ */
+
 
 public abstract class Person {
 	String firstName;

@@ -44,6 +44,7 @@ public class TeamBuilder extends Utility {
 	}
 	
 	public void createTeams() {
+		// Sort students by Java Knowledge
 		this.sortByJavaKnowledge();
 		
 		for(int i = 0; i < this.teams.size(); i += 2) {
@@ -51,9 +52,9 @@ public class TeamBuilder extends Utility {
 			CSCE314Student student2 = student1;
 			boolean foundPartner = false;
 			
+			// Find a student from the end of the list that is in the same section as the first student
 			for(int j = this.teams.size() - 1; j >= 0; j--) {
 				student2 = this.teams.get(j);
-			
 				if(student2 == student1) {
 					break;
 				} else if(student2.getSection() == student1.getSection()) {
@@ -63,6 +64,7 @@ public class TeamBuilder extends Utility {
 				}
 			}
 			
+			// Update list to put partners in contiguous positions
 			if(foundPartner)
 				this.teams.add(i, student2);
 			else {
@@ -86,7 +88,6 @@ public class TeamBuilder extends Utility {
 
 
 class SortBySection implements Comparator<CSCE314Student>{
-
 	@Override
 	public int compare(CSCE314Student student1, CSCE314Student student2) {
 		return student1.section - student2.section;
@@ -95,7 +96,6 @@ class SortBySection implements Comparator<CSCE314Student>{
 }
 
 class SortByJavaKnowledge implements Comparator<CSCE314Student> {
-	
 	@Override
 	public int compare(CSCE314Student student1, CSCE314Student student2) {
 		return student1.JavaKnowledge - student2.JavaKnowledge;

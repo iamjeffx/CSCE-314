@@ -1,3 +1,12 @@
+/** File: CSCE314Student.java
+ * Author: Jeffrey Xu
+ * Date: 8/04/2020
+ * Email: jeffreyxu@tamu.edu
+ * 
+ * Description: CSCE314Student object definition; inherits from Student 
+ */
+
+
 public class CSCE314Student extends Student {
 	int JavaKnowledge;
 	int section;
@@ -8,8 +17,8 @@ public class CSCE314Student extends Student {
 		section = 0;
 	}
 	
-	public CSCE314Student(String firstName, String lastName, String UIN, int JavaKnowledge, int section) {
-		super(firstName, lastName, UIN);
+	public CSCE314Student(String firstName, String lastName, String UIN, int JavaKnowledge, int section, Rank rank) {
+		super(firstName, lastName, UIN, rank);
 		this.JavaKnowledge = JavaKnowledge;
 		this.section = section;
 	}
